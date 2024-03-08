@@ -6,65 +6,30 @@
   <title>Library</title>
   <link rel="stylesheet" href="output.css">
   <script src="script.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="icon" href="library-svgrepo-com.svg" >
   <style>
-    .dialog-container {
-        width: 300px;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .form-group {
-        margin-bottom: 15px;
-    }
-
-    .form-group label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-
-    .form-group input[type="text"],
-    .form-group input[type="radio"] {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-    }
-
-    .form-group input[type="radio"] {
-        width: auto;
-        display: inline-block;
-        margin-right: 10px;
-    }
-
-    .btn-submit {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 3px;
-        cursor: pointer;
+    body {
+      font-family: 'Poppins', sans-serif;
     }
   </style>
 </head>
-<body class="w-screen ">
-  <nav class="flex justify-between h-20 text-xl text-gray-100 bg-slate-700">
-    <span class="flex items-center flex-grow mt-1 mb-1 ml-8">Library</span>
-    <ul class="flex items-center justify-around w-48 gap-8 mr-10">
+<body class="w-screen">
+  <nav class="flex justify-between h-24 text-gray-100 bg-slate-700">
+    <span class="flex items-center flex-grow mt-1 mb-1 ml-8 text-5xl">Library</span>
+    <ul class="flex items-center justify-around w-48 gap-8 mr-10 text-xl">
       <li><a href="">View</a></li>
       <li><a href="">Discover</a></li>
       <li><a href="">Login</a></li>
     </ul>
   </nav>
-  <div class="" id="main-div">
-    <button id="add-button">Click me!</button>
-    <dialog id="myDialog" class="dialog-container">
+  <div id="main-div" class="h-screen bg-slate-50">
+    <dialog id="myDialog" class="dialog-container" >
+      <div class="grid justify-end cancel-container">
+        <button type="button" id="cancel-btn" class="w-6 h-6 text-sm border-black border-solid rounded-full ">X</button>
+      </div>
       <form id="book-form" method="dialog">
         <div class="form-group">
             <label for="title">Title:</label>
@@ -79,15 +44,24 @@
             <input type="text" id="pages" name="pages" required>
         </div>
         <div class="form-group">
-            <label>Have you read it yet?</label>
-            <input type="radio" id="read-yes" name="read" value="yes" required>
-            <label for="read-yes">Yes</label>
-            <input type="radio" id="read-no" name="read" value="no">
-            <label for="read-no">No</label>
+          <input type="checkbox" id="read" name="read" value="read">
+          <label for="read" id="read-label">Have you read it yet?</label>
         </div>
         <button type="submit" class="btn-submit">Submit</button>
     </form>
     </dialog>
+    <div class="grid grid-flow-row grid-cols-4 gap-12 p-4 auto-cols-fr grid-container" id="book-grid">
+      <div class="flex flex-col items-center justify-center gap-3 bg-white border border-black border-solid rounded-lg bookDiv">
+        <p>"A Game Of Thrones"</p>
+        <p>G.R.R.M</p>
+        <p>678 pages</p>
+        <button class="block w-11/12 p-2 text-xl bg-green-400 rounded-lg">Read</button>
+        <button class="block w-11/12 p-2 text-xl bg-gray-200 rounded-lg">Remove</button>
+      </div>
+      <div class=" add-card">
+        <btn class="text-3xl cursor-pointer" id="add-button">Add</btn>
+      </div>
+    </div>
   </div>
 </body>
 </html>
