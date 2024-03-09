@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.form-group {
+  @apply mb-[15px];
+}
+
+.dialog-container {
+  @apply w-[300px] border bg-[#f9f9f9] -translate-x-2/4 -translate-y-2/4 p-5 rounded-[5px] border-solid border-[#ccc] left-2/4 top-2/4;
+}
+.form-group label {
+  @apply block font-[bold] mb-[5px];
+}
+#read-label {
+  @apply inline;
+}
+.form-group input[type="text"] {
+  @apply w-full border p-2 rounded-[3px] border-solid border-[#ccc];
+}
+.form-group input[type="checkbox"] {
+  @apply w-auto inline-block mr-2.5;
+}
+.grid-container {
+  @apply grid-rows-[repeat(auto-fill, minmax(250px,1fr))] grid grid-cols-[repeat(auto-fill, minmax(0px,1fr))] gap-12 m-8;
+}
+.btn-submit {
+  @apply bg-[#007bff] text-white cursor-pointer px-5 py-2.5 rounded-[3px] border-[none];
+}
+.read{
+  @apply block w-11/12 p-2 text-xl bg-green-400 rounded-lg;
+}
+.remove{
+  @apply block w-11/12 p-2 text-xl bg-gray-200 rounded-lg;
+}
+.unread{
+  @apply block w-11/12 p-2 text-xl bg-red-400 rounded-lg;
+}
+.bookDiv{
+  @apply flex flex-col items-center justify-center gap-3 text-lg bg-white border border-black border-solid rounded-lg;
+}
