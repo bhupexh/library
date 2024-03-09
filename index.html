@@ -25,10 +25,10 @@
       <li><a href="">Login</a></li>
     </ul>
   </nav>
-  <div id="main-div" class="h-screen bg-slate-50">
+  <div id="main-div" class="h-screen bg-gray-50">
     <dialog id="myDialog" class="dialog-container" >
       <div class="grid justify-end cancel-container">
-        <button type="button" id="cancel-btn" class="w-6 h-6 text-sm border-black border-solid rounded-full ">X</button>
+        <button type="button" id="cancel-btn" class="w-6 h-6 text-sm border-black border-solid rounded-full">X</button>
       </div>
       <form id="book-form" method="dialog">
         <div class="form-group">
@@ -50,16 +50,9 @@
         <button type="submit" class="btn-submit">Submit</button>
     </form>
     </dialog>
-    <div class="grid grid-flow-row grid-cols-4 gap-12 p-4 auto-cols-fr grid-container" id="book-grid">
-      <div class="flex flex-col items-center justify-center gap-3 bg-white border border-black border-solid rounded-lg bookDiv">
-        <p>"A Game Of Thrones"</p>
-        <p>G.R.R.M</p>
-        <p>678 pages</p>
-        <button class="block w-11/12 p-2 text-xl bg-green-400 rounded-lg">Read</button>
-        <button class="block w-11/12 p-2 text-xl bg-gray-200 rounded-lg">Remove</button>
-      </div>
-      <div class=" add-card">
-        <btn class="text-3xl cursor-pointer" id="add-button">Add</btn>
+    <div class="grid-container" id="book-grid">
+      <div class="bookDiv add-card">
+        <btn class="flex flex-col items-center justify-center w-24 h-24 text-3xl cursor-pointer" id="add-button"><img src="add-layer-1-svgrepo-com.svg" alt="add button"></btn>
       </div>
     </div>
   </div>

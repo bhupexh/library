@@ -4,11 +4,8 @@ function Library(){
   this.data = [];
   this.addBookToLibrary = function (){
     var i = 0;
-    var readClass = ["block", "w-11/12", "p-2", "text-xl", "bg-green-400", "rounded-lg"];
-    var removeClass = ["block", "w-11/12", "p-2", "text-xl", "bg-gray-200", "rounded-lg"];
-    var bookClass = ["flex", "flex-col", "items-center", "justify-center", "gap-3", "bg-white", "border", "border-black", "border-solid", "rounded-lg"];
-    
     var bookGrid = document.getElementById("book-grid");
+
     function addBookToLibrary(title, author, pages, haveRead){
       myLibrary[i] = new Book(title, author, pages, haveRead);
       createCard(myLibrary[i]);
@@ -16,36 +13,55 @@ function Library(){
     }
   
     function createCard(book){
-      var name = document.createElement("p");
+      var title = document.createElement("p");
       var author = document.createElement("p");
       var page = document.createElement("p");
       
-      name.innerText = book.title;
+      title.innerText = `\"${book.title}\"`;
       author.innerText = book.author;
-      page.innerText = book.pages;
+      page.innerText = `${book.pages} pages`;
+
       var readBtn = document.createElement("button");
       var removeBtn = document.createElement("button");
       var bookDiv = document.createElement("div");
+      bookDiv.dataset.index = i;
 
-      readBtn.innerText = "Read";
+      readBtn.addEventListener("click", (event) => {
+        var list = event.currentTarget.classList;
+        if(list.contains("read")){
+          list.add("unread");
+          list.remove("read");
+          event.currentTarget.innerText = "Not Read";
+        }
+        else{
+          list.add("read");
+          list.remove("unread");
+          event.currentTarget.innerText = "Read";
+        }
+      })
+
+      removeBtn.addEventListener("click", function() {
+        bookGrid.removeChild(bookDiv);
+        myLibrary.remove(bookDiv.dataset.index);
+      })
+
+      if(book.haveRead){
+        readBtn.classList.add("read");
+        readBtn.innerText = "Read";
+      }
+      else{
+        readBtn.classList.add("unread");
+        readBtn.innerText = "Not Read";
+      }
+
+      removeBtn.classList.add("remove");
+
       removeBtn.innerText = "Remove";
 
-      appendClass(bookDiv, bookClass);
-      appendClass(readBtn, readClass);
-      appendClass(removeBtn, removeClass);
+      bookDiv.classList.add("bookDiv")
 
-      bookDiv.append(name);
-      bookDiv.append(author);
-      bookDiv.append(page);
-      bookDiv.append(readBtn);
-      bookDiv.append(removeBtn);
+      bookDiv.append(title, author, page, readBtn, removeBtn);
       bookGrid.prepend(bookDiv);
-    }
-
-    function appendClass(item, classArray){
-      classArray.forEach(className => {
-        item.classList.add(className);
-      });
     }
 
     function Book(title, author, pages, haveRead) {
@@ -62,8 +78,7 @@ function Library(){
   }(); 
 }
 
-myLibrary.addBookToLibrary("The Lord Of The Rings", "J.R.R. Tolkien", 1000, "Yes");
-console.log(myLibrary[0].info());
+myLibrary.addBookToLibrary("The Lord Of The Rings", "J.R.R. Tolkien", 1000, "true");
 
 (() => {
   const addButton = document.getElementById("add-button");
@@ -75,8 +90,42 @@ console.log(myLibrary[0].info());
   });
 
   cancelButton.addEventListener("click", () => {
-    console.log("Cancel button clicked");
     dialog.close();
   });
+
+  const submitBtn = document.getElementsByClassName("btn-submit")[0];
+  submitBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const pages = document.getElementById("pages").value;
+    const read = document.getElementById("read").checked;
+    if(!formValidate(title, author, pages)){
+      return;
+    }
+    myLibrary.addBookToLibrary(title, author, pages, read);
+    dialog.close();
+  })
+
+  function formValidate(title, author, pages){
+    var error = [];
+    if(!title){
+      error.push("Title");
+    }
+    if(!author){
+      error.push("Author");
+    }
+    if(!pages){
+      error.push("Pages");
+    }
+    if(error.length !== 0){
+      const result = error.join(", ");
+      alert(`please enter ${result} !`);
+      return false;
+    }
+
+    return true;
+  }
+
 })();
 
